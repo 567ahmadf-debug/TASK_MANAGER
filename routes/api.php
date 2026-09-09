@@ -55,10 +55,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/categories/{id}/tasks', [TaskController::class, 'getTasksCategory']);
 
     // Routes الخاصة بالبروفايل (إذا كانت تحتاج مصادقة)
-
+Route::apiResource('/profile', ProfileController::class);
 
 
 });
 
 
-    Route::apiResource('/profile', ProfileController::class);
+    
