@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\Task;
 use App\Models\User;
 use GuzzleHttp\Promise\Create;
@@ -79,5 +80,11 @@ class usersController extends Controller
     public function getFavoritesTasks() {
         $tasks = Auth::user()->favoritesTasks;
         return response()->json($tasks, 200);
+    }
+
+    public function getUser(){
+        $user_id =  Auth::user()->id ; 
+        $userData = User::with('profile')->findOrFail($user_id) ; 
+        return new UserResource($userData) ; 
     }
 }

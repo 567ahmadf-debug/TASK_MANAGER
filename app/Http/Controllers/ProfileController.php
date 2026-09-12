@@ -33,7 +33,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store("photos", 'public');
-            $validated['imega'] = $path;
+            $validated['image'] = $path;
         }
         
         $profile = Profile::create($validated);

@@ -6,9 +6,6 @@ use App\Http\Controllers\usersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
 
 Route::post('register', [usersController::class, 'register']);
@@ -24,11 +21,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('/users/{id}')->group(function () {
 
-        Route::get('', [usersController::class, "print"]);
         Route::get('/profile', [usersController::class, "getProfile"]);
         Route::get('/tasks', [usersController::class, "getUserTask"]) ; 
         
+        
     });
+
+    Route::get('/user/' , [usersController::class , 'getUser']) ; 
 
     Route::get('/tasks/ordered', [TaskController::class, "getUserTaskpriority"]);
 
@@ -55,7 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/categories/{id}/tasks', [TaskController::class, 'getTasksCategory']);
 
     // Routes الخاصة بالبروفايل (إذا كانت تحتاج مصادقة)
-Route::apiResource('/profile', ProfileController::class);
+    Route::apiResource('/profile', ProfileController::class);
 
 
 });
